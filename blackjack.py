@@ -459,7 +459,16 @@ playing_cards_hearts = [
 ]
 # 0 is ace, 11 is jack, 12 is queen, 13 is king
 # the order inside the list goes spades, diamonds, clubs, hearts
-cards_dict = {0: [playing_cards_spades[0], playing_cards_diamonds[0], playing_cards_clubs[0], playing_cards_hearts[0]]}
+# the deck has an extra copy of all spades, so when generating cards, exclude suit[0]; only include suits 1-4
+def create_deck():
+    deck = {}
+    playing_cards = [playing_cards_spades, playing_cards_diamonds, playing_cards_clubs, playing_cards_hearts]
+    for value in range(14):
+        for suit in playing_cards:
+            if value not in deck:
+                deck[value] = [suit[value]]
+            deck[value].append(suit[value])
+    return deck
 
 class Grid():
 
@@ -476,7 +485,7 @@ class Player():
     pass
 
 play_area = Grid()
-print(play_area.area)
 
+deck = create_deck()
+print(deck[13][1])
 
-print(playing_cards_clubs[8])
