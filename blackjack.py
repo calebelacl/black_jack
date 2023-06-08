@@ -1,4 +1,5 @@
 import numpy as np
+import random
 playing_cards_spades = [
  """
   _____
@@ -470,22 +471,31 @@ def create_deck():
             deck[value].append(suit[value])
     return deck
 
-class Grid():
-
-    def __init__(self, x=5, y=5):
-        self.x = x
-        self.y = y
-        self.area = np.zeros(shape=(self.x, self.y))
 
 class Dealer():
-    pass
+    
+    def __init__(self, hand=''):
+        self.hand = hand
         
+    def play_card(self):
+        dealer_deck = deck
+        play = [random.randint(0, 13), random.randint(1, 4)]
+        card = dealer_deck[play[0]][play[1]]
+        self.hand = card
+        return self.hand
+
+
 
 class Player():
     pass
 
-play_area = Grid()
 
 deck = create_deck()
 print(deck[13][1])
+
+dealer = Dealer()
+for num in range(3):
+    print(dealer.play_card())
+print('______________________________________________________')
+
 
